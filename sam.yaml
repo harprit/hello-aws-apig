@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Hello World Lambda
+
+Resources:
+
+  HelloWorldAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+                swagger: "2.0"
+                info:
+                    title:
+                        Ref: AWS::StackName
+                schemes:
+                  - "https"
+                paths:
+                  /hello:
+                    get:
+                      produces:
+                      - "application/json"
+                      responses:
+                        "200":
+                          schema:
+                            $ref: "#/definitions/Empty"
+                      x-amazon-apigateway-integration:
+                        type: "mock"
+                        requestTemplates:
+                            application/json: "{\"statusCode\": 200}"
+                        responses:
+                          default:
+                            statusCode: "200"
+                definitions:
+                  Empty:
+                    type: "object"
+                    title: "Empty Schema"
