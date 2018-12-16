@@ -9,7 +9,6 @@ Resources:
     Properties:
       StageName: Prod
       DefinitionBody:
-                swagger: "2.0"
                 info:
                     title:
                         Ref: AWS::StackName
